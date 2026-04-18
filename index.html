@@ -1,1 +1,1546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MDA511 — Full Exam Cheat Sheet</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Syne:wght@400;600;800&family=Syne+Mono&display=swap');
 
+:root {
+  --bg: #0d0f14;
+  --surface: #13161e;
+  --surface2: #1a1e2a;
+  --border: #252935;
+  --accent1: #5b8df6;
+  --accent2: #f6a35b;
+  --accent3: #5bf6b3;
+  --accent4: #f65b8d;
+  --accent5: #c45bf6;
+  --text: #e8eaf0;
+  --muted: #7a7f94;
+  --w1: #5b8df6;
+  --w2: #f6a35b;
+  --w3: #5bf6b3;
+  --w4: #c45bf6;
+  --w5: #f65b8d;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Syne', sans-serif;
+  font-size: 15px;
+  line-height: 1.65;
+}
+
+/* NAV */
+.top-nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(13,15,20,0.96);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border);
+  padding: 0 2rem;
+  display: flex;
+  align-items: center;
+  gap: 0;
+  overflow-x: auto;
+}
+.top-nav .logo {
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--accent1);
+  white-space: nowrap;
+  padding: 14px 0;
+  margin-right: 2rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.top-nav a {
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 14px 14px;
+  white-space: nowrap;
+  border-bottom: 2px solid transparent;
+  transition: color 0.2s, border-color 0.2s;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.top-nav a:hover { color: var(--text); }
+.top-nav a.w1 { border-color: var(--w1); color: var(--w1); }
+.top-nav a.w2 { border-color: var(--w2); color: var(--w2); }
+.top-nav a.w3 { border-color: var(--w3); color: var(--w3); }
+.top-nav a.w4 { border-color: var(--w4); color: var(--w4); }
+.top-nav a.w5 { border-color: var(--w5); color: var(--w5); }
+
+/* LAYOUT */
+.page { max-width: 1000px; margin: 0 auto; padding: 3rem 2rem 6rem; }
+
+/* HERO */
+.hero {
+  text-align: center;
+  padding: 4rem 2rem;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 4rem;
+}
+.hero h1 {
+  font-size: clamp(2.4rem, 5vw, 4rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  margin-bottom: 1rem;
+}
+.hero h1 span { color: var(--accent1); }
+.hero p { font-size: 15px; color: var(--muted); max-width: 520px; margin: 0 auto; }
+.badges { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; margin-top: 1.5rem; }
+.badge {
+  font-size: 11px; font-weight: 600; padding: 4px 12px;
+  border-radius: 99px; letter-spacing: 0.06em; text-transform: uppercase;
+  border: 1px solid;
+}
+.badge-blue { color: var(--w1); border-color: var(--w1); background: rgba(91,141,246,0.08); }
+.badge-orange { color: var(--w2); border-color: var(--w2); background: rgba(246,163,91,0.08); }
+.badge-green { color: var(--w3); border-color: var(--w3); background: rgba(91,246,179,0.08); }
+.badge-purple { color: var(--w4); border-color: var(--w4); background: rgba(196,91,246,0.08); }
+.badge-pink { color: var(--w5); border-color: var(--w5); background: rgba(246,91,141,0.08); }
+
+/* WEEK SECTIONS */
+.week-section { margin-bottom: 5rem; }
+.week-header {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border);
+}
+.week-number {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 6px 14px;
+  border-radius: 4px;
+  white-space: nowrap;
+}
+.week-header h2 { font-size: 1.8rem; font-weight: 800; letter-spacing: -0.02em; }
+
+/* CATEGORY BLOCKS */
+.cat-block { margin-bottom: 1.5rem; }
+.cat-label {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.cat-label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+/* CARDS */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1.25rem 1.5rem;
+  margin-bottom: 1rem;
+}
+.card-title {
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.card-title .dot {
+  width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0;
+}
+.card p, .card li {
+  font-size: 13.5px;
+  color: #cdd0dc;
+  line-height: 1.7;
+}
+.card ul, .card ol { padding-left: 1.4rem; }
+.card li { margin-bottom: 5px; }
+
+/* GRID */
+.grid { display: grid; gap: 1rem; }
+.grid-2 { grid-template-columns: 1fr 1fr; }
+.grid-3 { grid-template-columns: 1fr 1fr 1fr; }
+@media (max-width: 700px) {
+  .grid-2, .grid-3 { grid-template-columns: 1fr; }
+}
+
+/* CODE */
+pre, code {
+  font-family: 'IBM Plex Mono', monospace;
+}
+pre {
+  background: #0a0c12;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 1rem 1.25rem;
+  font-size: 12.5px;
+  overflow-x: auto;
+  line-height: 1.7;
+  margin: 0.75rem 0;
+  color: #c8ccd8;
+}
+code {
+  background: rgba(91,141,246,0.12);
+  color: var(--accent1);
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+}
+pre code { background: none; color: inherit; padding: 0; border-radius: 0; }
+
+/* syntax highlight helpers */
+.kw { color: #c45bf6; }
+.fn { color: #5b8df6; }
+.st { color: #5bf6b3; }
+.cm { color: #4a5068; font-style: italic; }
+.nm { color: #f6a35b; }
+.op { color: #f65b8d; }
+
+/* FORMULA */
+.formula {
+  background: #0a0c12;
+  border-left: 3px solid var(--accent1);
+  padding: 0.6rem 1rem;
+  border-radius: 0 6px 6px 0;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 13px;
+  margin: 0.5rem 0;
+  color: #e0e4f0;
+}
+
+/* CALLOUTS */
+.callout {
+  border-radius: 6px;
+  padding: 0.75rem 1rem;
+  font-size: 13px;
+  margin: 0.75rem 0;
+  line-height: 1.6;
+}
+.callout-warn { background: rgba(246,163,91,0.08); border-left: 3px solid var(--w2); color: #e0c49a; }
+.callout-info { background: rgba(91,141,246,0.08); border-left: 3px solid var(--w1); color: #9ab4e8; }
+.callout-ok { background: rgba(91,246,179,0.08); border-left: 3px solid var(--w3); color: #8de0c0; }
+.callout-danger { background: rgba(246,91,141,0.08); border-left: 3px solid var(--w5); color: #e09ab8; }
+
+/* QA SECTION */
+.qa-section { margin-bottom: 5rem; }
+.qa-item {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  overflow: hidden;
+}
+.qa-q {
+  padding: 1rem 1.25rem;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  user-select: none;
+}
+.qa-q:hover { background: var(--surface2); }
+.qa-q .week-pill {
+  font-size: 10px;
+  font-weight: 800;
+  padding: 3px 9px;
+  border-radius: 99px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.qa-a {
+  display: none;
+  padding: 0 1.25rem 1.25rem;
+  font-size: 13.5px;
+  color: #b0b5c8;
+  border-top: 1px solid var(--border);
+  line-height: 1.75;
+}
+.qa-a.open { display: block; }
+.qa-a p + p { margin-top: 0.5rem; }
+.qa-chevron { transition: transform 0.2s; flex-shrink: 0; margin-top: 2px; }
+.qa-chevron.open { transform: rotate(180deg); }
+
+/* DIVIDER */
+.divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border), transparent);
+  margin: 4rem 0;
+}
+
+/* TABLE */
+table { width: 100%; border-collapse: collapse; font-size: 13px; margin: 0.75rem 0; }
+th { background: var(--surface2); color: var(--muted); font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 8px 12px; text-align: left; border-bottom: 1px solid var(--border); }
+td { padding: 8px 12px; border-bottom: 1px solid var(--border); color: #cdd0dc; vertical-align: top; }
+tr:last-child td { border-bottom: none; }
+td code { font-size: 11px; }
+
+/* WEEK COLOR THEMES */
+.w1-theme .week-number { background: rgba(91,141,246,0.15); color: var(--w1); }
+.w1-theme .week-header h2 { color: var(--w1); }
+.w1-theme .dot { background: var(--w1); }
+.w1-theme .formula { border-left-color: var(--w1); }
+
+.w2-theme .week-number { background: rgba(246,163,91,0.15); color: var(--w2); }
+.w2-theme .week-header h2 { color: var(--w2); }
+.w2-theme .dot { background: var(--w2); }
+.w2-theme .formula { border-left-color: var(--w2); }
+
+.w3-theme .week-number { background: rgba(91,246,179,0.15); color: var(--w3); }
+.w3-theme .week-header h2 { color: var(--w3); }
+.w3-theme .dot { background: var(--w3); }
+.w3-theme .formula { border-left-color: var(--w3); }
+
+.w4-theme .week-number { background: rgba(196,91,246,0.15); color: var(--w4); }
+.w4-theme .week-header h2 { color: var(--w4); }
+.w4-theme .dot { background: var(--w4); }
+.w4-theme .formula { border-left-color: var(--w4); }
+
+.w5-theme .week-number { background: rgba(246,91,141,0.15); color: var(--w5); }
+.w5-theme .week-header h2 { color: var(--w5); }
+.w5-theme .dot { background: var(--w5); }
+.w5-theme .formula { border-left-color: var(--w5); }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="top-nav">
+  <div class="logo">MDA511</div>
+  <a href="#week1" class="w1">Week 1</a>
+  <a href="#week2" class="w2">Week 2</a>
+  <a href="#week3" class="w3">Week 3</a>
+  <a href="#week4" class="w4">Week 4</a>
+  <a href="#week5" class="w5">Week 5</a>
+  <a href="#qa" style="color:var(--muted)">Practice Q&amp;A</a>
+</nav>
+
+<div class="page">
+
+<!-- HERO -->
+<div class="hero">
+  <h1>MDA511 <span>Exam Cheat Sheet</span></h1>
+  <p>Mathematical &amp; Statistical Methods — Weeks 1–5. Everything you need: lecture theory, tutorial problems, Python lab code, formulas, and practice questions.</p>
+  <div class="badges">
+    <span class="badge badge-blue">Week 1 — Functions &amp; Models</span>
+    <span class="badge badge-orange">Week 2 — Limits &amp; Derivatives</span>
+    <span class="badge badge-green">Week 3 — Optimisation</span>
+    <span class="badge badge-purple">Week 4 — Differentiation Rules</span>
+    <span class="badge badge-pink">Week 5 — Integration</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════
+     WEEK 1
+════════════════════════════════════════════════ -->
+<section id="week1" class="week-section w1-theme">
+  <div class="week-header">
+    <div class="week-number">Week 1</div>
+    <h2>Functions &amp; Models</h2>
+  </div>
+
+  <!-- LECTURE -->
+  <div class="cat-block">
+    <div class="cat-label">Lecture</div>
+
+    <div class="card">
+      <div class="card-title"><span class="dot"></span>What is a Mathematical Model?</div>
+      <p>A mathematical description (function or equation) of a real-world phenomenon. Models simplify reality enough to permit calculations but must be accurate enough to be useful. They are always idealisations — "Mother Nature has the final say."</p>
+      <p style="margin-top:8px">The modelling process: <strong>Real-world problem → Formulate model → Solve mathematically → Interpret results → Test against reality</strong></p>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span class="dot"></span>Four Ways to Represent a Function</div>
+      <ul>
+        <li><strong>Verbally:</strong> describe in words (e.g. "temperature depends on time")</li>
+        <li><strong>Numerically:</strong> table of values</li>
+        <li><strong>Visually:</strong> graph</li>
+        <li><strong>Algebraically:</strong> formula, e.g. A = πr²</li>
+      </ul>
+    </div>
+
+    <div class="grid grid-2">
+      <div class="card">
+        <div class="card-title"><span class="dot"></span>Domain &amp; Range</div>
+        <ul>
+          <li><strong>Domain</strong> = set of valid inputs x</li>
+          <li><strong>Range</strong> = set of all output values f(x)</li>
+          <li><strong>Independent variable</strong> = x (input)</li>
+          <li><strong>Dependent variable</strong> = y = f(x) (output)</li>
+        </ul>
+        <div class="callout callout-info">Example: f(x) = √x. Domain: [0, ∞). Range: [0, ∞).</div>
+      </div>
+      <div class="card">
+        <div class="card-title"><span class="dot"></span>Vertical Line Test</div>
+        <p>A curve in the xy-plane is the graph of a function if and only if no vertical line intersects the curve more than once.</p>
+        <div class="callout callout-warn">x = y² fails the test — vertical lines cross it twice. Its two halves y = √(x+2) and y = −√(x+2) ARE functions.</div>
+      </div>
+    </div>
+
+    <div class="grid grid-2">
+      <div class="card">
+        <div class="card-title"><span class="dot"></span>Even &amp; Odd Functions</div>
+        <div class="formula">Even:  f(−x) = f(x)   → symmetric about y-axis</div>
+        <div class="formula">Odd:   f(−x) = −f(x)  → symmetric about origin</div>
+        <ul style="margin-top:8px">
+          <li>f(x) = x⁵ + x → odd (check: f(−x) = −x⁵ − x = −f(x) ✓)</li>
+          <li>g(x) = 1 − x⁴ → even (check: g(−x) = 1 − x⁴ = g(x) ✓)</li>
+          <li>h(x) = 2x − x² → <strong>neither</strong></li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="card-title"><span class="dot"></span>Increasing &amp; Decreasing</div>
+        <p>f is <strong>increasing</strong> on interval I if x₁ &lt; x₂ ⟹ f(x₁) &lt; f(x₂)</p>
+        <p style="margin-top:6px">f is <strong>decreasing</strong> on interval I if x₁ &lt; x₂ ⟹ f(x₁) &gt; f(x₂)</p>
+        <div class="callout callout-info" style="margin-top:8px">f(x) = x² is decreasing on (−∞, 0] and increasing on [0, ∞).</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span class="dot"></span>Piecewise Defined Functions</div>
+      <p>Different formulas on different parts of the domain. Example:</p>
+      <div class="formula">
+        f(x) = { 1 − x   if x ≤ −1<br>
+               { x²      if x > −1
+      </div>
+      <p style="margin-top:8px">Evaluate: f(−2) = 1−(−2) = 3; f(−1) = 1−(−1) = 2; f(0) = 0² = 0</p>
+      <div class="callout callout-info">Step functions (like postage cost) are piecewise — they jump between constant values.</div>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span class="dot"></span>Catalog of Essential Functions — Know These</div>
+      <table>
+        <tr><th>Type</th><th>Form</th><th>Key Property</th></tr>
+        <tr><td>Linear</td><td>y = mx + b</td><td>Constant rate of change (slope m)</td></tr>
+        <tr><td>Polynomial (degree n)</td><td>aₙxⁿ + ... + a₀</td><td>Quadratic (n=2) → parabola</td></tr>
+        <tr><td>Power</td><td>f(x) = xᵃ</td><td>Even a → even shape; odd a → odd shape</td></tr>
+        <tr><td>Rational</td><td>P(x)/Q(x)</td><td>Domain excludes where Q(x) = 0</td></tr>
+        <tr><td>Exponential</td><td>f(x) = aˣ</td><td>Domain (−∞,∞), range (0,∞)</td></tr>
+        <tr><td>Logarithmic</td><td>f(x) = log_a(x)</td><td>Domain (0,∞), inverse of exponential</td></tr>
+        <tr><td>Trigonometric</td><td>sin x, cos x, tan x</td><td>sin &amp; cos: domain all reals, range [−1,1]</td></tr>
+      </table>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span class="dot"></span>Linear Models in Detail</div>
+      <div class="formula">y = f(x) = mx + b    (m = slope = rate of change, b = y-intercept)</div>
+      <p><strong>Example:</strong> Temperature vs altitude: Ground temp 20°C, at 1km = 10°C.</p>
+      <p>Slope m = (10 − 20)/(1 − 0) = −10°C/km. So: <strong>T = −10h + 20</strong></p>
+      <p style="margin-top:6px">At h = 2.5 km: T = −10(2.5) + 20 = <strong>−5°C</strong></p>
+      <div class="callout callout-info">The slope represents the <strong>rate of change</strong> — here, temperature drops 10°C per km of altitude.</div>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span class="dot"></span>Empirical Models &amp; Regression</div>
+      <ul>
+        <li><strong>Empirical model:</strong> built entirely from data when no physical law applies</li>
+        <li><strong>Scatter plot:</strong> plot data points (x, y) to visually assess the relationship</li>
+        <li><strong>Regression line:</strong> best-fit line that minimises sum of squared vertical distances (least squares)</li>
+        <li><strong>Y-intercept of regression line:</strong> predicted y when x = 0 — interpret carefully in context</li>
+        <li><strong>Extrapolation:</strong> predicting beyond data range — risky but sometimes asked for</li>
+      </ul>
+      <div class="callout callout-warn">Tutorial Q: Asbestos exposure (fibres/mL) vs % lung cancer. Plot scatter → assess linearity → find regression equation → estimate % at 4000 fibres/mL by substituting x = 4000 into the regression equation.</div>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span class="dot"></span>Temperature Model — Tutorial Q2 Solved</div>
+      <div class="formula">T = 0.024t + 8.53   (t = years since 1900)</div>
+      <ul>
+        <li><strong>Slope 0.024:</strong> Earth's average surface temperature rises 0.024°C per year</li>
+        <li><strong>Y-intercept 8.53:</strong> estimated average surface temperature in year 1900 was 8.53°C</li>
+        <li><strong>Prediction for 2100:</strong> t = 200, T = 0.024(200) + 8.53 = 4.8 + 8.53 = <strong>13.33°C</strong></li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span class="dot"></span>Falling Ball — Polynomial Model (Lecture Example)</div>
+      <p>Ball dropped from CN Tower (450 m). Data fits quadratic model:</p>
+      <div class="formula">h = 449.36 + 0.96t − 4.90t²</div>
+      <p>Ball hits ground when h = 0. Solve −4.90t² + 0.96t + 449.36 = 0 using quadratic formula → t ≈ <strong>9.67 seconds</strong></p>
+    </div>
+  </div>
+
+  <!-- TUTORIAL -->
+  <div class="cat-block">
+    <div class="cat-label">Tutorial</div>
+    <div class="card">
+      <div class="card-title"><span class="dot"></span>Key Tutorial Problems to Practise</div>
+      <ol>
+        <li><strong>Hot water tap:</strong> sketch T vs t — starts cold (mains temp), rises quickly, levels off at hot water temp. Show increasing then levelling function.</li>
+        <li><strong>Temperature model T = 0.024t + 8.53</strong> — interpret slope &amp; y-intercept; predict year 2100 (solved above)</li>
+        <li><strong>Scatter plot explanation:</strong> visual tool showing relationship between two numeric variables. 3 real-life examples: height vs weight, study hours vs grade, car age vs price.</li>
+        <li><strong>Regression line:</strong> the line that minimises sum of squared vertical residuals. Steps: (1) plot data, (2) use least squares method or Excel/Python, (3) interpret slope &amp; intercept.</li>
+        <li><strong>Asbestos data:</strong> make scatter plot, assess linearity, find &amp; draw regression line, interpret y-intercept, predict at x = 4000 fibres/mL.</li>
+      </ol>
+    </div>
+    <div class="card">
+      <div class="card-title"><span class="dot"></span>PBL Week 2 — Bendrix Overhead Costs (Regression)</div>
+      <p>Machine Hours &amp; Production Runs vs Overhead Costs. Three tasks:</p>
+      <ol>
+        <li>Use scatter plots to examine relationships between overhead &amp; machine hours; overhead &amp; production runs; machine hours &amp; production runs</li>
+        <li>Explain relationships using simple regression equations</li>
+        <li>Use <strong>multiple regression</strong> to analyse overhead vs both variables simultaneously (use Excel Data Analysis or Python)</li>
+      </ol>
+      <div class="callout callout-info">Multiple regression extends simple linear regression to multiple predictors: Overhead = a + b₁(MachineHours) + b₂(ProductionRuns)</div>
+    </div>
+  </div>
+
+  <!-- LAB -->
+  <div class="cat-block">
+    <div class="cat-label">Lab — Python (Jupyter Notebook)</div>
+    <div class="card">
+      <div class="card-title"><span class="dot"></span>Lab 1: Working with Numbers — All Key Code</div>
+      <pre><span class="cm"># Arithmetic operators</span>
+3 <span class="op">+</span> 2       <span class="cm"># 5  (addition)</span>
+3 <span class="op">-</span> 2       <span class="cm"># 1  (subtraction)</span>
+3 <span class="op">*</span> 2       <span class="cm"># 6  (multiplication)</span>
+3 <span class="op">/</span> 2       <span class="cm"># 1.5  (true/float division)</span>
+3 <span class="op">//</span> 2      <span class="cm"># 1   (floor/integer division — rounds DOWN)</span>
+5 <span class="op">%</span> 4       <span class="cm"># 1   (modulo = remainder)</span>
+2 <span class="op">**</span> 10     <span class="cm"># 1024 (exponentiation)</span>
+5 <span class="op">**</span> (<span class="nm">1</span><span class="op">/</span><span class="nm">2</span>)  <span class="cm"># 2.236... (square root)</span></pre>
+
+      <pre><span class="cm"># Number types</span>
+<span class="fn">type</span>(<span class="nm">3</span>)     <span class="cm"># &lt;class 'int'&gt;</span>
+<span class="fn">type</span>(<span class="nm">3.5</span>)   <span class="cm"># &lt;class 'float'&gt;</span>
+<span class="fn">type</span>(<span class="nm">3</span><span class="op">+</span><span class="nm">2j</span>)  <span class="cm"># &lt;class 'complex'&gt;</span>
+
+<span class="cm"># Type conversion</span>
+<span class="fn">int</span>(<span class="nm">3.0</span>)    <span class="cm"># 3</span>
+<span class="fn">int</span>(<span class="nm">9.8</span>)    <span class="cm"># 9 (TRUNCATES, does NOT round!)</span>
+<span class="fn">int</span>(<span class="nm">9.4</span>)    <span class="cm"># 9</span>
+<span class="fn">float</span>(<span class="nm">3</span>)    <span class="cm"># 3.0</span></pre>
+
+      <pre><span class="cm"># Fractions</span>
+<span class="kw">from</span> fractions <span class="kw">import</span> Fraction
+f <span class="op">=</span> Fraction(<span class="nm">3</span>, <span class="nm">4</span>)   <span class="cm"># represents 3/4</span>
+<span class="fn">print</span>(f)             <span class="cm"># 3/4</span>
+<span class="fn">print</span>(f <span class="op">+</span> <span class="nm">1</span>)         <span class="cm"># 7/4</span>
+<span class="fn">print</span>(f <span class="op">+</span> <span class="nm">1</span> <span class="op">+</span> f)     <span class="cm"># 5/2</span></pre>
+
+      <pre><span class="cm"># User input — ALWAYS returns a string!</span>
+a <span class="op">=</span> <span class="fn">input</span>(<span class="st">'Enter a number: '</span>)
+<span class="fn">print</span>(<span class="fn">type</span>(a))   <span class="cm"># &lt;class 'str'&gt;</span>
+
+<span class="cm"># Convert to number:</span>
+a <span class="op">=</span> <span class="fn">int</span>(<span class="fn">input</span>(<span class="st">'Enter int: '</span>))
+a <span class="op">=</span> <span class="fn">float</span>(<span class="fn">input</span>(<span class="st">'Enter float: '</span>))</pre>
+
+      <pre><span class="cm"># Writing functions</span>
+<span class="kw">def</span> <span class="fn">is_factor</span>(a, b):
+    <span class="kw">if</span> (b <span class="op">%</span> a) <span class="op">==</span> <span class="nm">0</span>:
+        <span class="kw">return</span> <span class="kw">True</span>
+    <span class="kw">else</span>:
+        <span class="kw">return</span> <span class="kw">False</span>
+
+<span class="cm"># Print all factors of 25</span>
+<span class="kw">for</span> i <span class="kw">in</span> <span class="fn">range</span>(<span class="nm">1</span>, <span class="nm">26</span>):
+    <span class="kw">if</span> <span class="fn">is_factor</span>(i, <span class="nm">25</span>):
+        <span class="fn">print</span>(i)   <span class="cm"># prints 1, 5, 25</span></pre>
+
+      <pre><span class="cm"># range() — note: range(1,4) gives 1,2,3 (NOT 4)</span>
+<span class="kw">for</span> i <span class="kw">in</span> <span class="fn">range</span>(<span class="nm">1</span>, <span class="nm">4</span>): <span class="fn">print</span>(i)  <span class="cm"># 1 2 3</span>
+<span class="kw">for</span> i <span class="kw">in</span> <span class="fn">range</span>(<span class="nm">4</span>):    <span class="fn">print</span>(i)  <span class="cm"># 0 1 2 3</span></pre>
+
+      <pre><span class="cm"># Lab challenge: Temperature unit converter</span>
+<span class="kw">def</span> <span class="fn">c_to_f</span>(c):
+    <span class="kw">return</span> c <span class="op">*</span> <span class="nm">9</span><span class="op">/</span><span class="nm">5</span> <span class="op">+</span> <span class="nm">32</span>
+
+<span class="kw">def</span> <span class="fn">f_to_c</span>(f):
+    <span class="kw">return</span> (f <span class="op">-</span> <span class="nm">32</span>) <span class="op">*</span> <span class="nm">5</span><span class="op">/</span><span class="nm">9</span></pre>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════════════════════════════
+     WEEK 2
+════════════════════════════════════════════════ -->
+<section id="week2" class="week-section w2-theme">
+  <div class="week-header">
+    <div class="week-number">Week 2</div>
+    <h2>Limits &amp; Derivatives</h2>
+  </div>
+
+  <!-- LECTURE -->
+  <div class="cat-block">
+    <div class="cat-label">Lecture</div>
+
+    <div class="card">
+      <div class="card-title"><span class="dot"></span>The Tangent Problem — How Derivatives Arise</div>
+      <p>To find the slope of a tangent line at point P, we use nearby point Q and compute the <strong>secant line slope</strong>, then take the limit as Q → P.</p>
+      <div class="formula">Secant slope:  m_PQ = [f(x) − f(a)] / (x − a)</div>
+      <div class="formula">Tangent slope: m = lim_{x→a} [f(x) − f(a)] / (x − a)</div>
+      <p><strong>Example:</strong> y = x² at P(1,1). Choose Q(1.5, 2.25): m_PQ = (2.25−1)/(1.5−1) = 2.5. As x→1, m_PQ → 2. So tangent is y − 1 = 2(x − 1) → <strong>y = 2x − 1</strong></p>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span class="dot"></span>Limits — Definition &amp; Theorem</div>
+      <div class="formula">lim_{x→a} f(x) = L</div>
+      <p>Means f(x) gets arbitrarily close to L as x approaches a (but x ≠ a).</p>
+      <div class="formula">Two-sided limit exists ⟺  lim_{x→a⁻} f(x) = L = lim_{x→a⁺} f(x)</div>
+      <div class="callout callout-warn">lim_{x→0} |x|/x does NOT exist: left limit = −1, right limit = +1. They differ!</div>
+      <div class="callout callout-ok">lim_{x→0} |x| = 0: left limit = 0, right limit = 0. They match — limit exists!</div>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span class="dot"></span>Derivative — The Core Definition</div>
+      <div class="formula">f′(a) = lim_{h→0} [f(a+h) − f(a)] / h</div>
+      <div class="formula">f′(x) = lim_{h→0} [f(x+h) − f(x)] / h   (as a function)</div>
+      <ul style="margin-top:10px">
+        <li>f′(x) = slope of the tangent line at any point x</li>
+        <li>f′(x) = instantaneous rate of change of f at x</li>
+        <li>The domain of f′ may be smaller than the domain of f</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span class="dot"></span>Derivative Notation — All Forms</div>
+      <div class="formula">f′(x) = y′ = dy/dx = df/dx = d/dx[f(x)] = Df(x)</div>
+      <p style="margin-top:8px">At a specific point x = a:</p>
+      <div class="formula">f′(a) = dy/dx|_{x=a}</div>
+      <p style="margin-top:8px">Leibniz notation dy/dx is NOT a ratio — it is the limit of Δy/Δx.</p>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span class="dot"></span>Velocity Problem — Average vs Instantaneous</div>
+      <div class="formula">Average velocity = Δs/Δt = [s(t₂) − s(t₁)] / (t₂ − t₁)</div>
+      <div class="formula">Instantaneous velocity = v(t) = s′(t) = lim_{Δt→0} Δs/Δt</div>
+      <p>Example: s(t) = 4.9t² (free fall). Average velocity from t=5 to t=5.1:</p>
+      <div class="formula">[s(5.1) − s(5)] / 0.1 = [4.9(5.1)² − 4.9(25)] / 0.1 ≈ 49.49 m/s</div>
+      <p>As the interval shrinks → instantaneous velocity at t=5 = <strong>49 m/s</strong></p>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span class="dot"></span>Higher Derivatives</div>
+      <div class="formula">f″(x) = (f′)′ = d²y/dx²   (second derivative)</div>
+      <div class="formula">f‴(x) = (f″)′              (third derivative)</div>
+      <div class="formula">f⁽ⁿ⁾(x)                    (nth derivative)</div>
+      <table style="margin-top:10px">
+        <tr><th>Function</th><th>Physical meaning (if position)</th></tr>
+        <tr><td>s(t)</td><td>Position</td></tr>
+        <tr><td>v(t) = s′(t)</td><td>Velocity (rate of change of position)</td></tr>
+        <tr><td>a(t) = s″(t)</td><td>Acceleration (rate of change of velocity)</td></tr>
+        <tr><td>j(t) = s‴(t)</td><td>Jerk (rate of change of acceleration)</td></tr>
+      </table>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span class="dot"></span>Three Ways a Function Fails to Be Differentiable</div>
+      <div class="grid grid-3">
+        <div>
+          <p style="font-weight:600;margin-bottom:4px">1. Corner/Kink</p>
+          <p style="font-size:13px">Left &amp; right derivatives exist but differ. Example: f(x) = |x| at x=0</p>
+        </div>
+        <div>
+          <p style="font-weight:600;margin-bottom:4px">2. Discontinuity</p>
+          <p style="font-size:13px">Any jump, removable, or infinite discontinuity. Must be continuous to be differentiable.</p>
+        </div>
+        <div>
+          <p style="font-weight:600;margin-bottom:4px">3. Vertical Tangent</p>
+          <p style="font-size:13px">Slope approaches ±∞. The limit of the difference quotient does not exist (finite).</p>
+        </div>
+      </div>
+      <div class="callout callout-danger" style="margin-top:10px"><strong>Key theorem:</strong> Differentiable at a ⟹ Continuous at a. The CONVERSE IS FALSE — |x| is continuous everywhere but not differentiable at 0.</div>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span class="dot"></span>Example: Differentiating f(x) = |x|</div>
+      <p>For x &gt; 0: f′(x) = 1. For x &lt; 0: f′(x) = −1. At x = 0: left limit of difference quotient = −1, right = +1. Since −1 ≠ 1, <strong>f′(0) does not exist</strong>.</p>
+      <div class="formula">f′(x) = { 1   if x > 0 }  { −1  if x < 0 }</div>
+    </div>
+  </div>
+
+  <!-- TUTORIAL -->
+  <div class="cat-block">
+    <div class="cat-label">Tutorial</div>
+    <div class="card">
+      <div class="card-title"><span class="dot"></span>Tank Problem — Secant Slopes (Tutorial Q1)</div>
+      <p>V(5)=694, V(10)=444, V(15)=250, V(20)=111, V(25)=28, V(30)=0. P=(15, 250).</p>
+      <div class="formula">m_PQ = [V(t) − 250] / [t − 15]</div>
+      <table>
+        <tr><th>Q at t =</th><th>Slope m_PQ</th></tr>
+        <tr><td>5</td><td>(694−250)/(5−15) = 444/(−10) = <strong>−44.4</strong></td></tr>
+        <tr><td>10</td><td>(444−250)/(10−15) = 194/(−5) = <strong>−38.8</strong></td></tr>
+        <tr><td>20</td><td>(111−250)/(20−15) = −139/5 = <strong>−27.8</strong></td></tr>
+        <tr><td>25</td><td>(28−250)/(25−15) = −222/10 = <strong>−22.2</strong></td></tr>
+        <tr><td>30</td><td>(0−250)/(30−15) = −250/15 ≈ <strong>−16.7</strong></td></tr>
+      </table>
+      <div class="callout callout-info">Estimate instantaneous slope at P by averaging adjacent secant slopes, or observe the trend as Q→P.</div>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span class="dot"></span>Mars Rock — Average Velocity (Tutorial Q2)</div>
+      <div class="formula">h(t) = 10t − 1.86t²</div>
+      <div class="formula">Average velocity over [a,b] = [h(b) − h(a)] / (b − a)</div>
+      <table>
+        <tr><th>Interval</th><th>Avg velocity (m/s)</th></tr>
+        <tr><td>[1, 2]</td><td>h(2)−h(1) = (20−7.44)−(10−1.86) = 12.56−8.14 = 4.42 → <strong>4.42</strong></td></tr>
+        <tr><td>[1, 1.5]</td><td>≈ <strong>5.21</strong></td></tr>
+        <tr><td>[1, 1.1]</td><td>≈ <strong>6.094</strong></td></tr>
+        <tr><td>[1, 1.01]</td><td>≈ <strong>6.2614</strong></td></tr>
+        <tr><td>[1, 1.001]</td><td>≈ <strong>6.27814</strong></td></tr>
+        <tr><td>[1, 1.0001]</td><td>≈ <strong>6.279814</strong></td></tr>
+      </table>
+      <p>As interval shrinks → instantaneous velocity at t=1: v(1) = 10 − 2(1.86)(1) = <strong>6.28 m/s</strong></p>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span class="dot"></span>Limits — Left/Right (Tutorial Q3 &amp; Q4)</div>
+      <p><strong>Q3:</strong> lim_{x→1⁻} f(x) = 3 and lim_{x→1⁺} f(x) = 7. Since 3 ≠ 7, the two-sided limit lim_{x→1} f(x) <strong>does not exist</strong>.</p>
+      <p style="margin-top:10px"><strong>Q4(a):</strong> lim_{x→0} |x| = 0. Left: lim |x| as x→0⁻ = lim −x = 0. Right: lim |x| as x→0⁺ = lim x = 0. Equal → limit = 0 ✓</p>
+      <p style="margin-top:10px"><strong>Q4(b):</strong> lim_{x→0} |x|/x does not exist. Left: x→0⁻, |x|/x = −x/x = −1. Right: x→0⁺, |x|/x = x/x = 1. −1 ≠ 1 ✗</p>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span class="dot"></span>Tyre Cost — Marginal Cost Interpretation (Analytic Q)</div>
+      <p>y = f(x) = cost of producing x metres of rubber tyre.</p>
+      <ul>
+        <li><strong>f′(x):</strong> instantaneous rate of change of cost with respect to quantity. Units: <strong>dollars per metre</strong>.</li>
+        <li><strong>f′(1000) = 9:</strong> when 1000 metres have been produced, the cost of producing one additional metre is approximately <strong>$9</strong>.</li>
+        <li><strong>f′(50) vs f′(500) vs f′(3000):</strong> typically f′ decreases with scale (economies of scale), so f′(50) &gt; f′(500). At very high volume f′(3000) might rise if capacity is strained.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- LAB -->
+  <div class="cat-block">
+    <div class="cat-label">Lab — Python (Jupyter Notebook)</div>
+    <div class="card">
+      <div class="card-title"><span class="dot"></span>Lab 2: Visualise Data with Matplotlib — All Key Code</div>
+      <pre><span class="cm"># Lists and tuples — containers for data</span>
+simpleList <span class="op">=</span> [<span class="nm">1</span>, <span class="nm">2</span>, <span class="nm">3</span>]         <span class="cm"># mutable</span>
+simpleTuple <span class="op">=</span> (<span class="nm">1</span>, <span class="nm">2</span>, <span class="nm">3</span>)        <span class="cm"># immutable (cannot change after creation)</span>
+
+<span class="cm"># Indexing — starts at 0!</span>
+simpleList[<span class="nm">0</span>]    <span class="cm"># 1 (first element)</span>
+simpleList[<span class="nm">1</span>]    <span class="cm"># 2 (second element)</span>
+
+<span class="cm"># Iterate over list or tuple</span>
+<span class="kw">for</span> val <span class="kw">in</span> simpleList:
+    <span class="fn">print</span>(val)      <span class="cm"># prints 1, 2, 3</span>
+
+<span class="cm"># Append to list (can't do this with tuples)</span>
+myList <span class="op">=</span> []
+myList.append(<span class="nm">5</span>)</pre>
+
+      <pre><span class="cm"># Basic plotting with matplotlib</span>
+<span class="kw">import</span> matplotlib.pyplot <span class="kw">as</span> plt
+
+x <span class="op">=</span> [<span class="nm">1</span>, <span class="nm">2</span>, <span class="nm">3</span>]
+y <span class="op">=</span> [<span class="nm">2</span>, <span class="nm">4</span>, <span class="nm">6</span>]
+
+plt.plot(x, y)            <span class="cm"># line plot</span>
+plt.plot(x, y, <span class="st">'o'</span>)      <span class="cm"># scatter (circle markers)</span>
+plt.plot(x, y, marker<span class="op">=</span><span class="st">'*'</span>)  <span class="cm"># star markers</span>
+
+<span class="cm"># Labels and title (IMPORTANT for full marks)</span>
+plt.title(<span class="st">'My Graph Title'</span>)
+plt.xlabel(<span class="st">'X-axis label'</span>)
+plt.ylabel(<span class="st">'Y-axis label'</span>)
+
+plt.show()                <span class="cm"># display plot</span>
+plt.savefig(<span class="st">'myfig.png'</span>) <span class="cm"># save to file</span></pre>
+
+      <pre><span class="cm"># Multiple lines on same plot (with legend)</span>
+nyc_temp_2000 <span class="op">=</span> [<span class="nm">31.3</span>, <span class="nm">37.3</span>, <span class="nm">47.2</span>, ...]
+nyc_temp_2006 <span class="op">=</span> [<span class="nm">40.9</span>, <span class="nm">35.7</span>, <span class="nm">43.1</span>, ...]
+nyc_temp_2012 <span class="op">=</span> [<span class="nm">37.3</span>, <span class="nm">40.9</span>, <span class="nm">50.9</span>, ...]
+
+plt.plot(nyc_temp_2000, label<span class="op">=</span><span class="st">'2000'</span>)
+plt.plot(nyc_temp_2006, label<span class="op">=</span><span class="st">'2006'</span>)
+plt.plot(nyc_temp_2012, label<span class="op">=</span><span class="st">'2012'</span>)
+plt.legend()
+plt.show()</pre>
+
+      <pre><span class="cm"># Axis control</span>
+plt.axis(ymin<span class="op">=</span><span class="nm">0</span>)           <span class="cm"># set y-axis minimum to 0</span>
+<span class="fn">print</span>(plt.axis())           <span class="cm"># returns (xmin, xmax, ymin, ymax)</span></pre>
+
+      <pre><span class="cm"># Quadratic function visualisation (challenge)</span>
+x_values <span class="op">=</span> [<span class="op">-</span><span class="nm">1</span>, <span class="nm">1</span>, <span class="nm">2</span>, <span class="nm">3</span>, <span class="nm">4</span>, <span class="nm">5</span>]
+y_values <span class="op">=</span> []
+<span class="kw">for</span> x <span class="kw">in</span> x_values:
+    y <span class="op">=</span> x<span class="op">**</span><span class="nm">2</span> <span class="op">+</span> <span class="nm">2</span><span class="op">*</span>x <span class="op">+</span> <span class="nm">1</span>    <span class="cm"># y = (x+1)² — a parabola</span>
+    y_values.append(y)
+    <span class="fn">print</span>(<span class="st">f'x={x} y={y}'</span>)
+plt.plot(x_values, y_values)
+plt.show()                   <span class="cm"># variation is NONLINEAR (parabolic)</span></pre>
+      <div class="callout callout-warn">Matplotlib auto-scales y-axis to data range — even tiny differences look dramatic. Use <code>axis(ymin=0)</code> to show true scale.</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════════════════════════════
+     WEEK 3
+════════════════════════════════════════════════ -->
+<section id="week3" class="week-section w3-theme">
+  <div class="week-header">
+    <div class="week-number">Week 3</div>
+    <h2>Differential Calculus &amp; Optimisation</h2>
+  </div>
+
+  <!-- LECTURE -->
+  <div class="cat-block">
+    <div class="cat-label">Lecture</div>
+
+    <div class="grid grid-2">
+      <div class="card">
+        <div class="card-title"><span class="dot"></span>Absolute vs Local Extrema</div>
+        <ul>
+          <li><strong>Absolute (global) max:</strong> f(c) ≥ f(x) for ALL x in domain</li>
+          <li><strong>Absolute (global) min:</strong> f(c) ≤ f(x) for ALL x in domain</li>
+          <li><strong>Local (relative) max:</strong> f(c) ≥ f(x) for x near c</li>
+          <li><strong>Local (relative) min:</strong> f(c) ≤ f(x) for x near c</li>
+          <li>Local extrema occur only in the <strong>interior</strong>, never at endpoints</li>
+          <li>A local extremum CAN also be an absolute extremum</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="card-title"><span class="dot"></span>Extreme Value Theorem</div>
+        <p>If f is <strong>continuous</strong> on a <strong>closed interval [a, b]</strong>, then f attains both an absolute maximum AND an absolute minimum on [a, b].</p>
+        <div class="callout callout-danger" style="margin-top:10px">
+          <strong>BOTH conditions required:</strong><br>
+          Without continuity → function may "skip" its extreme value<br>
+          Without closed interval → function may approach but never reach the extreme
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span class="dot"></span>Fermat's Theorem &amp; Critical Numbers</div>
+      <p><strong>Fermat's Theorem:</strong> If f has a local max or min at c, and f′(c) exists, then <strong>f′(c) = 0</strong>.</p>
+      <div class="callout callout-danger">The CONVERSE IS FALSE: f′(c) = 0 does NOT guarantee an extremum. Example: f(x) = x³ at c=0 — f′(0) = 0 but the curve just crosses its horizontal tangent.</div>
+      <div class="formula">Critical number c: f′(c) = 0  OR  f′(c) does not exist</div>
+      <p style="margin-top:8px">Example: f(x) = |x| has a local min at x=0, and f′(0) does not exist — still a critical number.</p>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span class="dot"></span>Closed Interval Method — Find Absolute Extrema</div>
+      <ol style="font-size:14px">
+        <li style="margin-bottom:8px"><strong>Find all critical numbers</strong> in the open interval (a, b): solve f′(x) = 0 AND find where f′(x) DNE</li>
+        <li style="margin-bottom:8px"><strong>Evaluate f</strong> at each critical number AND at the endpoints x = a and x = b</li>
+        <li><strong>Compare all values:</strong> largest = absolute max; smallest = absolute min</li>
+      </ol>
+      <div class="callout callout-ok">This method ALWAYS works for a continuous function on a closed interval.</div>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span class="dot"></span>Optimisation Problem Steps</div>
+      <ol>
+        <li><strong>Understand:</strong> What quantity Q are you maximising/minimising?</li>
+        <li><strong>Diagram:</strong> draw and label all variables</li>
+        <li><strong>Notation:</strong> assign Q and other variables symbols</li>
+        <li><strong>Express Q</strong> as a function of one variable (use constraints to eliminate others)</li>
+        <li><strong>State domain</strong> of the function in context</li>
+        <li><strong>Apply Closed Interval Method</strong> to find absolute max/min</li>
+      </ol>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span class="dot"></span>Farmer Fence — Full Worked Solution</div>
+      <p>2400 ft of fencing, rectangular field along river (no fence on river side). Maximise area.</p>
+      <div class="formula">Let x = depth (perpendicular to river), y = width (parallel to river)</div>
+      <div class="formula">Constraint: 2x + y = 2400  →  y = 2400 − 2x</div>
+      <div class="formula">A(x) = xy = x(2400 − 2x) = 2400x − 2x²,   0 ≤ x ≤ 1200</div>
+      <div class="formula">A′(x) = 2400 − 4x = 0  →  x = 600</div>
+      <p>Check values: A(0) = 0, A(600) = 2400(600) − 2(600²) = <strong>720,000 ft²</strong>, A(1200) = 0</p>
+      <p>Maximum area = 720,000 ft² at x = 600 ft, y = 1200 ft. Field is <strong>600 ft × 1200 ft</strong>.</p>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span class="dot"></span>Business Applications</div>
+      <div class="formula">Cost:     C(x) = cx  (c = cost per unit, x = quantity)</div>
+      <div class="formula">Marginal cost:    C′(x)  (cost of one additional unit)</div>
+      <div class="formula">Revenue:  R(x) = x · p(x)  (p(x) = price function)</div>
+      <div class="formula">Marginal revenue: R′(x)</div>
+      <div class="formula">Profit:   P(x) = R(x) − C(x)</div>
+      <div class="formula">Marginal profit:  P′(x) = R′(x) − C′(x)</div>
+      <p style="margin-top:10px"><strong>Profit is maximised when R′(x) = C′(x)</strong> (marginal revenue = marginal cost)</p>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span class="dot"></span>TV Rebate — Full Worked Solution</div>
+      <p>Currently sells 200 TVs/week at $350. Each $10 rebate → 20 more sold. Find rebate to maximise revenue.</p>
+      <div class="formula">x = TVs sold per week. Extra TVs = x − 200. Each extra 20 TVs → $10 price drop.</div>
+      <div class="formula">Price per TV drop = (x − 200)/20 × $10 = (x−200)/2</div>
+      <div class="formula">p(x) = 350 − (x−200)/2 = 450 − x/2</div>
+      <div class="formula">R(x) = xp(x) = 450x − x²/2</div>
+      <div class="formula">R′(x) = 450 − x = 0  →  x = 450 TVs</div>
+      <div class="formula">p(450) = 450 − 450/2 = 225</div>
+      <p>Rebate = 350 − 225 = <strong>$125</strong>. Revenue = 450 × 225 = <strong>$101,250/week</strong></p>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span class="dot"></span>Practice: Identify Extrema from a Graph</div>
+      <p><strong>From Tutorial exercises:</strong></p>
+      <ul>
+        <li>Absolute Maximum: highest point over full domain (including endpoints)</li>
+        <li>Absolute Minimum: lowest point over full domain</li>
+        <li>Relative Max: a local "hill" (interior only)</li>
+        <li>Relative Min: a local "valley" (interior only)</li>
+      </ul>
+      <div class="callout callout-info">Example from slides: Abs max (4,5), Abs min (2,−6), Rel maxes at (−1,2) and (4,5), Rel mins at (−3,−2) and (2,−6)</div>
+    </div>
+  </div>
+
+  <!-- TUTORIAL -->
+  <div class="cat-block">
+    <div class="cat-label">Tutorial</div>
+    <div class="card">
+      <div class="card-title"><span class="dot"></span>PBL Week 4 — Boyle's Law &amp; Quotient Rule</div>
+      <p><strong>Boyle's Law:</strong> PV = C (constant at constant temperature).</p>
+      <div class="formula">V = C/P = C · P⁻¹</div>
+      <div class="formula">dV/dP = −C/P²</div>
+      <p>At P = 50 kPa, V = 0.106 m³ → C = PV = 50 × 0.106 = 5.3 kPa·m³</p>
+      <div class="formula">dV/dP = −5.3/50² = −5.3/2500 = −0.00212 m³/kPa</div>
+      <p><strong>Meaning:</strong> At P=50 kPa, each additional 1 kPa of pressure reduces volume by 0.00212 m³.</p>
+    </div>
+    <div class="card">
+      <div class="card-title"><span class="dot"></span>SpaceX Rocket — Optimisation Problem</div>
+      <div class="formula">v(t) = 0.001302t³ − 0.09209t² + 23.61t − 3.083,   t ∈ [0, 134]</div>
+      <div class="formula">a(t) = v′(t) = 0.003906t² − 0.18418t + 23.61</div>
+      <p>Find max/min of a(t) on [0, 134] using Closed Interval Method:</p>
+      <ol>
+        <li>a′(t) = 0.007812t − 0.18418 = 0 → t = 0.18418/0.007812 ≈ 23.57 s (critical point)</li>
+        <li>Evaluate a at t = 0, t ≈ 23.57, t = 134</li>
+        <li>Compare — whichever is largest/smallest is the absolute max/min of acceleration</li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- LAB -->
+  <div class="cat-block">
+    <div class="cat-label">Lab — Python (Jupyter Notebook)</div>
+    <div class="card">
+      <div class="card-title"><span class="dot"></span>Lab 3: SymPy Algebra — All Key Code</div>
+      <pre><span class="cm"># Define symbols</span>
+<span class="kw">from</span> sympy <span class="kw">import</span> Symbol, symbols
+x <span class="op">=</span> Symbol(<span class="st">'x'</span>)
+x, y, z <span class="op">=</span> symbols(<span class="st">'x,y,z'</span>)</pre>
+
+      <pre><span class="cm"># Basic operations — SymPy keeps them symbolic</span>
+s <span class="op">=</span> x<span class="op">*</span>y <span class="op">+</span> x<span class="op">*</span>y    <span class="cm"># returns 2*x*y (not a number)</span>
+p <span class="op">=</span> x <span class="op">*</span> (x <span class="op">+</span> x)  <span class="cm"># returns 2*x**2</span></pre>
+
+      <pre><span class="cm"># Factoring and expanding</span>
+<span class="kw">from</span> sympy <span class="kw">import</span> factor, expand
+
+expr <span class="op">=</span> x<span class="op">**</span><span class="nm">2</span> <span class="op">-</span> y<span class="op">**</span><span class="nm">2</span>
+factor(expr)            <span class="cm"># (x - y)*(x + y)</span>
+expand(factor(expr))    <span class="cm"># x**2 - y**2 (back to original)</span>
+
+expr2 <span class="op">=</span> x<span class="op">**</span><span class="nm">3</span> <span class="op">+</span> <span class="nm">3</span><span class="op">*</span>x<span class="op">**</span><span class="nm">2</span><span class="op">*</span>y <span class="op">+</span> <span class="nm">3</span><span class="op">*</span>x<span class="op">*</span>y<span class="op">**</span><span class="nm">2</span> <span class="op">+</span> y<span class="op">**</span><span class="nm">3</span>
+factor(expr2)           <span class="cm"># (x + y)**3</span></pre>
+
+      <pre><span class="cm"># Substituting values using subs()</span>
+result <span class="op">=</span> (x<span class="op">**</span><span class="nm">2</span> <span class="op">-</span> y<span class="op">**</span><span class="nm">2</span>).subs({x: <span class="nm">1</span>, y: <span class="nm">2</span>})   <span class="cm"># evaluates to -3</span>
+result <span class="op">=</span> expr.subs({x: <span class="nm">1</span><span class="op">-</span>y})               <span class="cm"># substitutes expression</span>
+
+<span class="kw">from</span> sympy <span class="kw">import</span> simplify
+<span class="fn">print</span>(simplify(result))   <span class="cm"># simplifies the result further</span></pre>
+
+      <pre><span class="cm"># Solving equations — solve() assumes expr = 0</span>
+<span class="kw">from</span> sympy <span class="kw">import</span> solve
+
+solve(x <span class="op">-</span> <span class="nm">5</span> <span class="op">-</span> <span class="nm">7</span>)              <span class="cm"># [12]  (solves x-12=0)</span>
+solve(x<span class="op">**</span><span class="nm">2</span> <span class="op">+</span> <span class="nm">5</span><span class="op">*</span>x <span class="op">+</span> <span class="nm">4</span>)         <span class="cm"># [-4, -1]</span>
+solve(x<span class="op">**</span><span class="nm">2</span> <span class="op">+</span> <span class="nm">5</span><span class="op">*</span>x <span class="op">+</span> <span class="nm">4</span>, dict<span class="op">=</span><span class="kw">True</span>) <span class="cm"># [{x: -4}, {x: -1}]</span></pre>
+
+      <pre><span class="cm"># System of linear equations</span>
+expr1 <span class="op">=</span> <span class="nm">2</span><span class="op">*</span>x <span class="op">+</span> <span class="nm">3</span><span class="op">*</span>y <span class="op">-</span> <span class="nm">6</span>     <span class="cm"># represents 2x + 3y = 6</span>
+expr2 <span class="op">=</span> <span class="nm">3</span><span class="op">*</span>x <span class="op">+</span> <span class="nm">2</span><span class="op">*</span>y <span class="op">-</span> <span class="nm">12</span>    <span class="cm"># represents 3x + 2y = 12</span>
+solve((expr1, expr2), dict<span class="op">=</span><span class="kw">True</span>)   <span class="cm"># [{x: 24/5, y: -18/5}]</span></pre>
+
+      <pre><span class="cm"># Plotting with SymPy</span>
+<span class="op">%</span>matplotlib inline
+<span class="kw">from</span> sympy.plotting <span class="kw">import</span> plot
+<span class="kw">from</span> sympy <span class="kw">import</span> Symbol
+x <span class="op">=</span> Symbol(<span class="st">'x'</span>)
+plot(<span class="nm">2</span><span class="op">*</span>x<span class="op">+</span><span class="nm">3</span>)               <span class="cm"># single expression</span>
+plot(<span class="nm">2</span><span class="op">*</span>x<span class="op">+</span><span class="nm">3</span>, <span class="nm">3</span><span class="op">*</span>x<span class="op">+</span><span class="nm">1</span>)        <span class="cm"># two expressions on same axes</span>
+
+<span class="cm"># With colours and legend</span>
+p <span class="op">=</span> plot(<span class="nm">2</span><span class="op">*</span>x<span class="op">+</span><span class="nm">3</span>, <span class="nm">3</span><span class="op">*</span>x<span class="op">+</span><span class="nm">1</span>, legend<span class="op">=</span><span class="kw">True</span>, show<span class="op">=</span><span class="kw">False</span>)
+p[<span class="nm">0</span>].line_color <span class="op">=</span> <span class="st">'b'</span>
+p[<span class="nm">1</span>].line_color <span class="op">=</span> <span class="st">'r'</span>
+p.show()</pre>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════════════════════════════
+     WEEK 4
+════════════════════════════════════════════════ -->
+<section id="week4" class="week-section w4-theme">
+  <div class="week-header">
+    <div class="week-number">Week 4</div>
+    <h2>Differentiation Rules &amp; Applications</h2>
+  </div>
+
+  <!-- LECTURE -->
+  <div class="cat-block">
+    <div class="cat-label">Lecture / PBL</div>
+
+    <div class="card">
+      <div class="card-title"><span class="dot"></span>Core Differentiation Rules</div>
+      <table>
+        <tr><th>Rule</th><th>Formula</th><th>Example</th></tr>
+        <tr><td>Constant</td><td>d/dx[c] = 0</td><td>d/dx[5] = 0</td></tr>
+        <tr><td>Power</td><td>d/dx[xⁿ] = nxⁿ⁻¹</td><td>d/dx[x³] = 3x²</td></tr>
+        <tr><td>Sum/Difference</td><td>(f ± g)′ = f′ ± g′</td><td>d/dx[x² + x] = 2x + 1</td></tr>
+        <tr><td>Constant Multiple</td><td>(cf)′ = cf′</td><td>d/dx[5x²] = 10x</td></tr>
+        <tr><td>Product</td><td>(fg)′ = f′g + fg′</td><td></td></tr>
+        <tr><td>Quotient</td><td>(f/g)′ = (f′g − fg′)/g²</td><td>see below</td></tr>
+        <tr><td>Chain</td><td>d/dx[f(g(x))] = f′(g(x))·g′(x)</td><td>d/dx[sin(x²)] = cos(x²)·2x</td></tr>
+      </table>
+    </div>
+
+    <div class="grid grid-2">
+      <div class="card">
+        <div class="card-title"><span class="dot"></span>Quotient Rule — Detail</div>
+        <div class="formula">If R(x) = f(x)/g(x), then:</div>
+        <div class="formula">R′(x) = [f′(x)·g(x) − f(x)·g′(x)] / [g(x)]²</div>
+        <p style="margin-top:8px">Mnemonic: "Low d-High minus High d-Low, over Low squared"</p>
+        <p style="margin-top:8px"><strong>PBL Q:</strong> For R(x) = (x − 3x³ + 5x⁵)/(1 + 3x³ + 6x⁶ + 9x⁹), find R′(0). Hint: let f = numerator, g = denominator. At x=0: f(0)=0, g(0)=1, f′(0)=1, g′(0)=0. R′(0) = (1·1 − 0·0)/1² = <strong>1</strong></p>
+      </div>
+      <div class="card">
+        <div class="card-title"><span class="dot"></span>Chain Rule — Related Rates</div>
+        <div class="formula">d/dt[V(r(t))] = dV/dr · dr/dt</div>
+        <p><strong>Balloon problem:</strong> V = (4/3)πr³</p>
+        <div class="formula">dV/dr = 4πr²</div>
+        <div class="formula">dV/dt = 4πr² · dr/dt</div>
+        <p style="margin-top:8px"><strong>dV/dr:</strong> rate of change of volume with respect to radius (units: m³/m = m²)</p>
+        <p><strong>dV/dt:</strong> rate of change of volume with respect to time (units: m³/s)</p>
+        <p><strong>dr/dt:</strong> rate at which radius is growing (units: m/s)</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span class="dot"></span>Boyle's Law — Full Solution</div>
+      <p>PV = C at constant temperature. At P=50 kPa, V=0.106 m³ → C = 5.3 kPa·m³</p>
+      <div class="formula">V(P) = C/P = 5.3/P</div>
+      <div class="formula">dV/dP = −C/P² = −5.3/P²</div>
+      <div class="formula">At P = 50:  dV/dP = −5.3/2500 = −0.00212  m³/kPa</div>
+      <p><strong>Meaning:</strong> At P=50 kPa, each 1 kPa increase in pressure decreases volume by 0.00212 m³. Negative because pressure and volume are inversely related.</p>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span class="dot"></span>SpaceX Rocket — Step-by-step Acceleration Optimisation</div>
+      <div class="formula">v(t) = 0.001302t³ − 0.09209t² + 23.61t − 3.083</div>
+      <div class="formula">a(t) = v′(t) = 3(0.001302)t² − 2(0.09209)t + 23.61</div>
+      <div class="formula">a(t) = 0.003906t² − 0.18418t + 23.61</div>
+      <p style="margin-top:8px">Find absolute max/min of a(t) on [0, 134]:</p>
+      <div class="formula">a′(t) = 0.007812t − 0.18418 = 0  →  t ≈ 23.57 s</div>
+      <p>Evaluate a at t=0, t=23.57, t=134. Compare values to find max and min acceleration.</p>
+    </div>
+  </div>
+
+  <!-- LAB -->
+  <div class="cat-block">
+    <div class="cat-label">Lab — Python (Jupyter Notebook)</div>
+    <div class="card">
+      <div class="card-title"><span class="dot"></span>Lab 4: Solving Calculus Problems with SymPy — All Key Code</div>
+
+      <pre><span class="cm"># Math module vs SymPy for symbolic math</span>
+<span class="kw">import</span> math
+math.sin(math.pi<span class="op">/</span><span class="nm">2</span>)    <span class="cm"># 1.0  (numerical only)</span>
+
+<span class="kw">import</span> sympy
+sympy.sin(math.pi<span class="op">/</span><span class="nm">2</span>)   <span class="cm"># 1.00000...  (SymPy version)</span></pre>
+
+      <pre><span class="cm"># Solve symbolic equations (e.g. projectile motion)</span>
+<span class="kw">from</span> sympy <span class="kw">import</span> Symbol, sin, solve
+u, t, g, theta <span class="op">=</span> symbols(<span class="st">'u t g theta'</span>)
+solve(u<span class="op">*</span>sin(theta) <span class="op">-</span> g<span class="op">*</span>t, t)   <span class="cm"># [u*sin(theta)/g]</span></pre>
+
+      <pre><span class="cm"># LIMITS</span>
+<span class="kw">from</span> sympy <span class="kw">import</span> Limit, Symbol, S
+x <span class="op">=</span> Symbol(<span class="st">'x'</span>)
+
+<span class="cm"># lim as x → +∞ of 1/x</span>
+Limit(<span class="nm">1</span><span class="op">/</span>x, x, S.Infinity).doit()     <span class="cm"># 0</span>
+
+<span class="cm"># lim as x → 0⁻ of 1/x (from negative side)</span>
+Limit(<span class="nm">1</span><span class="op">/</span>x, x, <span class="nm">0</span>, dir<span class="op">=</span><span class="st">'-'</span>).doit()   <span class="cm"># -∞</span>
+
+<span class="cm"># lim as x → 0⁺ of 1/x (from positive side — default)</span>
+Limit(<span class="nm">1</span><span class="op">/</span>x, x, <span class="nm">0</span>, dir<span class="op">=</span><span class="st">'+'</span>).doit()   <span class="cm"># +∞</span></pre>
+
+      <pre><span class="cm"># DERIVATIVES</span>
+<span class="kw">from</span> sympy <span class="kw">import</span> Symbol, Derivative
+x <span class="op">=</span> Symbol(<span class="st">'x'</span>)
+y <span class="op">=</span> <span class="nm">5</span><span class="op">*</span>x<span class="op">**</span><span class="nm">2</span> <span class="op">+</span> <span class="nm">2</span><span class="op">*</span>x <span class="op">+</span> <span class="nm">8</span>
+
+<span class="cm"># First derivative</span>
+dydx <span class="op">=</span> Derivative(y, x).doit()        <span class="cm"># 10*x + 2</span>
+
+<span class="cm"># Value at a specific point</span>
+dydx.subs({x: <span class="nm">1</span>})                    <span class="cm"># 12</span>
+
+<span class="cm"># Second derivative (add order as 3rd argument)</span>
+d2ydx2 <span class="op">=</span> Derivative(y, x, <span class="nm">2</span>).doit()  <span class="cm"># 10</span></pre>
+
+      <pre><span class="cm"># FINDING EXTREMA — Critical points + Second Derivative Test</span>
+<span class="kw">from</span> sympy <span class="kw">import</span> Symbol, solve, Derivative
+x <span class="op">=</span> Symbol(<span class="st">'x'</span>)
+f <span class="op">=</span> x<span class="op">**</span><span class="nm">5</span> <span class="op">-</span> <span class="nm">30</span><span class="op">*</span>x<span class="op">**</span><span class="nm">3</span> <span class="op">+</span> <span class="nm">50</span><span class="op">*</span>x
+
+<span class="cm"># Step 1: First derivative and critical points</span>
+d1 <span class="op">=</span> Derivative(f, x).doit()
+critical_pts <span class="op">=</span> solve(d1)     <span class="cm"># finds all x where f'(x)=0</span>
+
+<span class="cm"># Step 2: Second derivative</span>
+d2 <span class="op">=</span> Derivative(f, x, <span class="nm">2</span>).doit()
+
+<span class="cm"># Step 3: Evaluate d2 at each critical point</span>
+<span class="cm"># If d2 < 0 → local MAX;  d2 > 0 → local MIN;  d2 = 0 → inconclusive</span>
+<span class="kw">for</span> cp <span class="kw">in</span> critical_pts:
+    val <span class="op">=</span> d2.subs({x: cp}).evalf()
+    <span class="fn">print</span>(<span class="st">f'At x={cp:.3f}: d2={val:.3f}'</span>)</pre>
+
+      <pre><span class="cm"># INTEGRALS</span>
+<span class="kw">from</span> sympy <span class="kw">import</span> Symbol, Integral
+x <span class="op">=</span> Symbol(<span class="st">'x'</span>)
+k <span class="op">=</span> Symbol(<span class="st">'k'</span>)
+
+<span class="cm"># Indefinite integral ∫ kx dx</span>
+Integral(k<span class="op">*</span>x, x).doit()           <span class="cm"># k*x**2/2  (no +C shown)</span>
+
+<span class="cm"># Definite integral ∫₀² kx dx</span>
+Integral(k<span class="op">*</span>x, (x, <span class="nm">0</span>, <span class="nm">2</span>)).doit()  <span class="cm"># 2*k</span></pre>
+
+      <pre><span class="cm"># PROBABILITY DENSITY FUNCTION (Normal distribution)</span>
+<span class="kw">from</span> sympy <span class="kw">import</span> Symbol, exp, sqrt, pi, Integral
+x <span class="op">=</span> Symbol(<span class="st">'x'</span>)
+<span class="cm"># f(x) = (1/√(2π)) * e^(-(x-10)²/2)</span>
+f <span class="op">=</span> exp(<span class="op">-</span>(x <span class="op">-</span> <span class="nm">10</span>)<span class="op">**</span><span class="nm">2</span><span class="op">/</span><span class="nm">2</span>) <span class="op">/</span> sqrt(<span class="nm">2</span><span class="op">*</span>pi)
+
+<span class="cm"># P(11 < x < 12) — probability grade between 11 and 12</span>
+Integral(f, (x, <span class="nm">11</span>, <span class="nm">12</span>)).doit().evalf()   <span class="cm"># ≈ 0.136</span>
+
+<span class="cm"># Verify PDF property: ∫_{-∞}^{∞} f(x) dx = 1</span>
+Integral(f, (x, <span class="op">-</span>S.Infinity, S.Infinity)).doit().evalf()  <span class="cm"># 1.0</span></pre>
+
+      <div class="callout callout-info"><strong>Key SymPy summary:</strong> Derivative(f,x).doit() for 1st, Derivative(f,x,2).doit() for 2nd. solve(d1) for critical points. Integral(f,x).doit() for indefinite, Integral(f,(x,a,b)).doit() for definite.</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════════════════════════════
+     WEEK 5
+════════════════════════════════════════════════ -->
+<section id="week5" class="week-section w5-theme">
+  <div class="week-header">
+    <div class="week-number">Week 5</div>
+    <h2>Integral Calculus</h2>
+  </div>
+
+  <!-- LECTURE / PBL -->
+  <div class="cat-block">
+    <div class="cat-label">Lecture / PBL</div>
+
+    <div class="card">
+      <div class="card-title"><span class="dot"></span>Net Change Theorem</div>
+      <p>The integral of a rate of change equals the net change:</p>
+      <div class="formula">∫ₐᵇ F′(x) dx = F(b) − F(a)</div>
+      <p style="margin-top:8px">This is the fundamental connection between differentiation and integration. If you know the rate of change (derivative), integrate it to get the total change.</p>
+      <div class="callout callout-info">y can increase, then decrease, then increase again — F(b) − F(a) gives the NET change, not total distance travelled.</div>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span class="dot"></span>Riemann Sums — Approximating Definite Integrals</div>
+      <p>Approximate the area under a curve using rectangles:</p>
+      <div class="formula">Left endpoint:  Σ f(xᵢ₋₁)·Δx</div>
+      <div class="formula">Right endpoint: Σ f(xᵢ)·Δx</div>
+      <p style="margin-top:8px">As the number of rectangles → ∞, the Riemann sum → the exact definite integral.</p>
+      <div class="callout callout-info">Bernhard Riemann (1826–1866): formalised the concept of the integral as the limit of sums. His work underpins all of modern integration theory and real analysis.</div>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span class="dot"></span>Displacement vs Distance — Critical Distinction</div>
+      <div class="formula">Displacement = ∫ₐᵇ v(t) dt   (signed — can be positive, negative, or zero)</div>
+      <div class="formula">Distance = ∫ₐᵇ |v(t)| dt       (always ≥ 0)</div>
+      <p style="margin-top:10px"><strong>When v(t) changes sign</strong> in [a,b], split the integral at each zero:</p>
+      <div class="formula">Find t* where v(t*) = 0 in (a,b)</div>
+      <div class="formula">Distance = |∫ₐᵗ* v(t) dt| + |∫ₜ*ᵇ v(t) dt|</div>
+      <div class="callout callout-warn">If you compute ∫v(t)dt without taking |v|, you get displacement only. Positive and negative parts CANCEL — you'll undercount distance.</div>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span class="dot"></span>v(t) = t² − 2t − 3 on [2, 4] — Full Worked Solution</div>
+      <p><strong>Step 1: Find zeros of v in [2,4]</strong></p>
+      <div class="formula">t² − 2t − 3 = (t−3)(t+1) = 0  →  t = 3 (in [2,4]) or t = −1 (outside)</div>
+      <p>v &lt; 0 on [2, 3] (particle moves backward). v &gt; 0 on [3, 4] (particle moves forward).</p>
+
+      <p style="margin-top:10px"><strong>Step 2: Antiderivative</strong></p>
+      <div class="formula">∫(t² − 2t − 3) dt = t³/3 − t² − 3t + C</div>
+
+      <p style="margin-top:10px"><strong>Step 3: Displacement</strong></p>
+      <div class="formula">∫₂⁴ v dt = [t³/3 − t² − 3t]₂⁴</div>
+      <div class="formula">= (64/3 − 16 − 12) − (8/3 − 4 − 6)</div>
+      <div class="formula">= (64/3 − 28) − (8/3 − 10)</div>
+      <div class="formula">= (64/3 − 84/3) − (8/3 − 30/3)</div>
+      <div class="formula">= −20/3 − (−22/3) = 2/3 metres</div>
+
+      <p style="margin-top:10px"><strong>Step 4: Distance</strong></p>
+      <div class="formula">|∫₂³ v dt| = |[t³/3 − t² − 3t]₂³| = |(9−9−9)−(8/3−4−6)| = |−9−(−22/3)| = |−5/3| = 5/3</div>
+      <div class="formula">∫₃⁴ v dt = [t³/3 − t² − 3t]₃⁴ = (64/3−16−12)−(9−9−9) = −20/3−(−9) = 7/3</div>
+      <div class="formula">Total distance = 5/3 + 7/3 = 12/3 = 4 metres</div>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span class="dot"></span>SARS Deaths — Area Under Curve (PBL05)</div>
+      <table>
+        <tr><th>Date</th><th>Deaths/day</th><th>Date</th><th>Deaths/day</th></tr>
+        <tr><td>March 1</td><td>0.0079</td><td>April 26</td><td>0.5620</td></tr>
+        <tr><td>March 15</td><td>0.0638</td><td>May 10</td><td>0.4630</td></tr>
+        <tr><td>March 29</td><td>0.1944</td><td>May 24</td><td>0.2897</td></tr>
+        <tr><td>April 12</td><td>0.4435</td><td></td><td></td></tr>
+      </table>
+      <p style="margin-top:10px">Intervals are 14 days each. Using left endpoints (Δt = 14):</p>
+      <div class="formula">Total deaths ≈ 14 × (0.0079 + 0.0638 + 0.1944 + 0.4435 + 0.5620 + 0.4630)</div>
+      <div class="formula">= 14 × 1.7346 ≈ 24.28 deaths (left endpoint estimate)</div>
+      <div class="callout callout-info">Each term = deaths/day × days = deaths in that interval. Sum = total deaths. This IS the Riemann sum approximation of ∫D(t)dt.</div>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span class="dot"></span>Machine Depreciation — Optimisation with Integrals</div>
+      <p>f(t) = continuous depreciation rate. ∫₀ᵗ f(s)ds = total loss in value since last overhaul (area under depreciation rate curve = cumulative loss).</p>
+      <div class="formula">C(t) = [A + ∫₀ᵗ f(s)ds] / t   (average cost per month)</div>
+      <p>Company wants to minimise C(t). Setting C′(t) = 0 leads to:</p>
+      <div class="formula">Optimal overhaul interval T satisfies: C(T) = f(T)</div>
+      <p>(The average cost per period equals the current depreciation rate.)</p>
+    </div>
+  </div>
+
+  <!-- LAB -->
+  <div class="cat-block">
+    <div class="cat-label">Lab — Python (builds on Lab 4 SymPy skills)</div>
+    <div class="card">
+      <div class="card-title"><span class="dot"></span>Integration &amp; PDFs in SymPy</div>
+      <pre><span class="cm"># Indefinite integral — no limits</span>
+<span class="kw">from</span> sympy <span class="kw">import</span> Symbol, Integral, symbols
+x, k <span class="op">=</span> symbols(<span class="st">'x k'</span>)
+Integral(k<span class="op">*</span>x, x).doit()             <span class="cm"># k*x**2/2</span>
+Integral(x<span class="op">**</span><span class="nm">2</span> <span class="op">-</span> <span class="nm">2</span><span class="op">*</span>x <span class="op">-</span> <span class="nm">3</span>, x).doit() <span class="cm"># x**3/3 - x**2 - 3*x</span></pre>
+
+      <pre><span class="cm"># Definite integral ∫₂⁴ (t²-2t-3) dt</span>
+t <span class="op">=</span> Symbol(<span class="st">'t'</span>)
+Integral(t<span class="op">**</span><span class="nm">2</span> <span class="op">-</span> <span class="nm">2</span><span class="op">*</span>t <span class="op">-</span> <span class="nm">3</span>, (t, <span class="nm">2</span>, <span class="nm">4</span>)).doit()   <span class="cm"># 2/3 (displacement)</span>
+
+<span class="cm"># For distance: split at t=3 where v changes sign</span>
+<span class="kw">from</span> sympy <span class="kw">import</span> Abs
+<span class="kw">import</span> sympy <span class="kw">as</span> sp
+v <span class="op">=</span> t<span class="op">**</span><span class="nm">2</span> <span class="op">-</span> <span class="nm">2</span><span class="op">*</span>t <span class="op">-</span> <span class="nm">3</span>
+piece1 <span class="op">=</span> Integral(<span class="op">-</span>v, (t, <span class="nm">2</span>, <span class="nm">3</span>)).doit()  <span class="cm"># |v| on [2,3] = -v since v<0</span>
+piece2 <span class="op">=</span> Integral(v,  (t, <span class="nm">3</span>, <span class="nm">4</span>)).doit()  <span class="cm"># v on [3,4] since v>0</span>
+distance <span class="op">=</span> piece1 <span class="op">+</span> piece2               <span class="cm"># 4 metres</span></pre>
+
+      <pre><span class="cm"># Normal PDF — probability density function</span>
+<span class="kw">from</span> sympy <span class="kw">import</span> exp, sqrt, pi, Integral, S
+x <span class="op">=</span> Symbol(<span class="st">'x'</span>)
+f <span class="op">=</span> exp(<span class="op">-</span>(x<span class="op">-</span><span class="nm">10</span>)<span class="op">**</span><span class="nm">2</span><span class="op">/</span><span class="nm">2</span>) <span class="op">/</span> sqrt(<span class="nm">2</span><span class="op">*</span>pi)
+
+<span class="cm"># P(11 < grade < 12)</span>
+Integral(f, (x, <span class="nm">11</span>, <span class="nm">12</span>)).doit().evalf()            <span class="cm"># ≈ 0.136</span>
+
+<span class="cm"># Verify: ∫_{-∞}^{∞} f dx = 1 (property of all PDFs)</span>
+Integral(f, (x, <span class="op">-</span>S.Infinity, S.Infinity)).doit().evalf()  <span class="cm"># 1.0</span></pre>
+
+      <div class="callout callout-ok">Key insight: A probability density function integrates to 1 over all possible values. The definite integral over any interval gives the probability of a value falling in that interval.</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════════════════════════════
+     PRACTICE Q&A
+════════════════════════════════════════════════ -->
+<section id="qa" class="qa-section">
+  <div style="margin-bottom:2rem">
+    <div style="font-size:10px;font-weight:800;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);margin-bottom:0.5rem">Sample Exam Questions</div>
+    <h2 style="font-size:1.8rem;font-weight:800;letter-spacing:-0.02em">Practice Q &amp; A</h2>
+    <p style="color:var(--muted);font-size:14px;margin-top:0.5rem">Click any question to reveal the full worked answer.</p>
+  </div>
+
+  <!-- W1 -->
+  <div class="qa-item">
+    <div class="qa-q" onclick="toggle(this)">
+      <span>Q1 (Week 1) — For the temperature model T = 0.024t + 8.53 where t is years since 1900: (a) What does the slope represent? (b) What was the temperature in 1900? (c) Predict temperature in 2100.</span>
+      <span style="display:flex;align-items:center;gap:8px;flex-shrink:0"><span class="week-pill" style="background:rgba(91,141,246,0.15);color:var(--w1)">W1</span><svg class="qa-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span>
+    </div>
+    <div class="qa-a">
+      <p><strong>(a) Slope = 0.024°C per year.</strong> The slope represents the rate at which the Earth's average surface temperature is increasing — 0.024 degrees Celsius every year.</p>
+      <p><strong>(b) Y-intercept = 8.53°C.</strong> When t = 0 (year 1900), T = 8.53°C. This is the estimated average surface temperature at the start of the 20th century.</p>
+      <p><strong>(c) t = 2100 − 1900 = 200. T = 0.024(200) + 8.53 = 4.80 + 8.53 = 13.33°C.</strong></p>
+    </div>
+  </div>
+
+  <div class="qa-item">
+    <div class="qa-q" onclick="toggle(this)">
+      <span>Q2 (Week 1) — Determine whether h(x) = 2x − x² is even, odd, or neither.</span>
+      <span style="display:flex;align-items:center;gap:8px;flex-shrink:0"><span class="week-pill" style="background:rgba(91,141,246,0.15);color:var(--w1)">W1</span><svg class="qa-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span>
+    </div>
+    <div class="qa-a">
+      <p>Test by computing h(−x): h(−x) = 2(−x) − (−x)² = −2x − x²</p>
+      <p>Compare: h(x) = 2x − x². Is h(−x) = h(x)? → −2x − x² ≠ 2x − x². <strong>Not even.</strong></p>
+      <p>Is h(−x) = −h(x)? → −h(x) = −2x + x². Is −2x − x² = −2x + x²? No. <strong>Not odd.</strong></p>
+      <p><strong>Answer: h(x) = 2x − x² is NEITHER even nor odd.</strong></p>
+    </div>
+  </div>
+
+  <div class="qa-item">
+    <div class="qa-q" onclick="toggle(this)">
+      <span>Q3 (Week 1 Lab) — What is the difference between / and // in Python? What does int(9.8) return and why?</span>
+      <span style="display:flex;align-items:center;gap:8px;flex-shrink:0"><span class="week-pill" style="background:rgba(91,141,246,0.15);color:var(--w1)">W1</span><svg class="qa-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span>
+    </div>
+    <div class="qa-a">
+      <p><strong>/</strong> is true (float) division: 3/2 = 1.5. Always returns a float even if the result is a whole number (e.g. 4/2 = 2.0).</p>
+      <p><strong>//</strong> is floor (integer) division: 3//2 = 1. Always rounds DOWN to the nearest integer. Note: −3//2 = −2 (rounds DOWN, not toward zero).</p>
+      <p><strong>int(9.8) returns 9.</strong> The int() function TRUNCATES (chops off the decimal part) — it does NOT round. So int(9.4) = 9 and int(9.8) = 9 both, even though 9.8 is closer to 10.</p>
+    </div>
+  </div>
+
+  <!-- W2 -->
+  <div class="qa-item">
+    <div class="qa-q" onclick="toggle(this)">
+      <span>Q4 (Week 2) — Explain why lim_{x→0} |x|/x does not exist. Show using left and right limits.</span>
+      <span style="display:flex;align-items:center;gap:8px;flex-shrink:0"><span class="week-pill" style="background:rgba(246,163,91,0.15);color:var(--w2)">W2</span><svg class="qa-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span>
+    </div>
+    <div class="qa-a">
+      <p>Using the theorem: a two-sided limit exists if and only if left-hand = right-hand limit.</p>
+      <p><strong>Left-hand limit (x → 0⁻):</strong> For x &lt; 0, |x| = −x, so |x|/x = −x/x = −1. Therefore lim_{x→0⁻} |x|/x = −1.</p>
+      <p><strong>Right-hand limit (x → 0⁺):</strong> For x &gt; 0, |x| = x, so |x|/x = x/x = 1. Therefore lim_{x→0⁺} |x|/x = 1.</p>
+      <p>Since −1 ≠ 1, the two-sided limit <strong>does not exist</strong>.</p>
+    </div>
+  </div>
+
+  <div class="qa-item">
+    <div class="qa-q" onclick="toggle(this)">
+      <span>Q5 (Week 2) — Three ways a function can fail to be differentiable at a point. Give an example of each.</span>
+      <span style="display:flex;align-items:center;gap:8px;flex-shrink:0"><span class="week-pill" style="background:rgba(246,163,91,0.15);color:var(--w2)">W2</span><svg class="qa-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span>
+    </div>
+    <div class="qa-a">
+      <p><strong>1. Corner/Kink:</strong> The left and right derivatives exist but are different. Example: f(x) = |x| at x=0. Left derivative = −1, right derivative = +1. They differ, so f′(0) DNE.</p>
+      <p><strong>2. Discontinuity:</strong> If f is not continuous at a, it cannot be differentiable there (differentiable ⟹ continuous, so not continuous ⟹ not differentiable). Example: any step function at its jump point.</p>
+      <p><strong>3. Vertical tangent:</strong> The derivative limit approaches ±∞. Example: f(x) = x^(1/3) at x=0 — the tangent line is vertical. The slope is undefined (infinite).</p>
+      <p style="margin-top:8px;color:var(--accent3)"><strong>Remember:</strong> Differentiable ⟹ Continuous. The converse is FALSE — |x| is continuous at 0 but not differentiable there.</p>
+    </div>
+  </div>
+
+  <div class="qa-item">
+    <div class="qa-q" onclick="toggle(this)">
+      <span>Q6 (Week 2 Lab) — Write Python code using matplotlib to plot y = x² + 2x + 1 for x values from −5 to 5, with title, axis labels, and correct scaling.</span>
+      <span style="display:flex;align-items:center;gap:8px;flex-shrink:0"><span class="week-pill" style="background:rgba(246,163,91,0.15);color:var(--w2)">W2</span><svg class="qa-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span>
+    </div>
+    <div class="qa-a">
+      <pre style="background:#0a0c12;border:1px solid #252935;border-radius:6px;padding:1rem;font-size:12px;margin-top:0">import matplotlib.pyplot as plt
+
+x_values = list(range(-5, 6))   # [-5, -4, ..., 5]
+y_values = []
+for x in x_values:
+    y = x**2 + 2*x + 1          # y = (x+1)^2 — parabola
+    y_values.append(y)
+
+plt.plot(x_values, y_values, marker='o')
+plt.title('Quadratic Function y = x² + 2x + 1')
+plt.xlabel('x')
+plt.ylabel('y')
+plt.axis(ymin=0)
+plt.show()</pre>
+      <p>The variation is <strong>nonlinear</strong> (parabolic). y = x²+2x+1 = (x+1)² — a perfect square, parabola with vertex at (−1, 0).</p>
+    </div>
+  </div>
+
+  <!-- W3 -->
+  <div class="qa-item">
+    <div class="qa-q" onclick="toggle(this)">
+      <span>Q7 (Week 3) — State the Extreme Value Theorem and explain why BOTH conditions are necessary with counterexamples.</span>
+      <span style="display:flex;align-items:center;gap:8px;flex-shrink:0"><span class="week-pill" style="background:rgba(91,246,179,0.15);color:var(--w3)">W3</span><svg class="qa-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span>
+    </div>
+    <div class="qa-a">
+      <p><strong>Extreme Value Theorem:</strong> If f is continuous on a closed interval [a,b], then f attains both an absolute maximum and an absolute minimum on [a,b].</p>
+      <p><strong>Why continuity is needed:</strong> Consider f defined on [0,2] where f(x) = x for x &lt; 1 and f(x) = 0 for x = 1 and f(x) = x for x &gt; 1 (with a removable discontinuity at x=1). The function never actually reaches values near 1 — it skips over them. No maximum is attained in the usual sense.</p>
+      <p><strong>Why closed interval is needed:</strong> On the open interval (0, 2), f(x) = 1/x is continuous but has no maximum — it approaches ∞ as x → 0⁺ but never reaches it. Similarly g(x) = x has no maximum on (0,2) — it gets arbitrarily close to 2 but never reaches it.</p>
+    </div>
+  </div>
+
+  <div class="qa-item">
+    <div class="qa-q" onclick="toggle(this)">
+      <span>Q8 (Week 3) — A store sells 200 flat-screen TVs at $350 each. Each $10 rebate increases sales by 20 TVs/week. Find the rebate that maximises revenue. Show all working.</span>
+      <span style="display:flex;align-items:center;gap:8px;flex-shrink:0"><span class="week-pill" style="background:rgba(91,246,179,0.15);color:var(--w3)">W3</span><svg class="qa-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span>
+    </div>
+    <div class="qa-a">
+      <p>Let x = TVs sold per week. Extra TVs = x − 200. For each 20 extra TVs, price drops $10.</p>
+      <p>Price decrease per extra TV = $10/20 = $0.50.</p>
+      <p>Price function: p(x) = 350 − 0.5(x − 200) = 350 − 0.5x + 100 = 450 − 0.5x</p>
+      <p>Revenue: R(x) = x · p(x) = x(450 − 0.5x) = 450x − 0.5x²</p>
+      <p>R′(x) = 450 − x. Set R′(x) = 0: x = 450 TVs.</p>
+      <p>R″(x) = −1 &lt; 0 → confirms this is a maximum (parabola opening downward).</p>
+      <p>Optimal price: p(450) = 450 − 0.5(450) = 450 − 225 = <strong>$225</strong></p>
+      <p>Rebate = Original price − Optimal price = 350 − 225 = <strong>$125</strong></p>
+      <p>Maximum revenue = 450 × 225 = <strong>$101,250 per week</strong></p>
+    </div>
+  </div>
+
+  <div class="qa-item">
+    <div class="qa-q" onclick="toggle(this)">
+      <span>Q9 (Week 3 Lab) — Using SymPy, solve the system of equations: 2x + 3y = 6 and 3x + 2y = 12. Write the code and state the solution.</span>
+      <span style="display:flex;align-items:center;gap:8px;flex-shrink:0"><span class="week-pill" style="background:rgba(91,246,179,0.15);color:var(--w3)">W3</span><svg class="qa-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span>
+    </div>
+    <div class="qa-a">
+      <pre style="background:#0a0c12;border:1px solid #252935;border-radius:6px;padding:1rem;font-size:12px;margin-top:0">from sympy import symbols, solve
+
+x, y = symbols('x y')
+expr1 = 2*x + 3*y - 6     # 2x + 3y = 6  →  2x + 3y - 6 = 0
+expr2 = 3*x + 2*y - 12    # 3x + 2y = 12 →  3x + 2y - 12 = 0
+
+solution = solve((expr1, expr2), dict=True)
+print(solution)   # [{x: 24/5, y: -18/5}]</pre>
+      <p>Solution: x = 24/5 = 4.8, y = −18/5 = −3.6</p>
+      <p>Key: solve() takes a tuple of expressions and assumes each = 0. dict=True shows which value belongs to which variable.</p>
+    </div>
+  </div>
+
+  <!-- W4 -->
+  <div class="qa-item">
+    <div class="qa-q" onclick="toggle(this)">
+      <span>Q10 (Week 4 Lab) — Using SymPy, find the derivative of y = 5x² + 2x + 8, evaluate it at x=1, then find and classify any critical points using the second derivative test.</span>
+      <span style="display:flex;align-items:center;gap:8px;flex-shrink:0"><span class="week-pill" style="background:rgba(196,91,246,0.15);color:var(--w4)">W4</span><svg class="qa-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span>
+    </div>
+    <div class="qa-a">
+      <pre style="background:#0a0c12;border:1px solid #252935;border-radius:6px;padding:1rem;font-size:12px;margin-top:0">from sympy import Symbol, Derivative, solve
+
+x = Symbol('x')
+y = 5*x**2 + 2*x + 8
+
+# First derivative
+d1 = Derivative(y, x).doit()    # 10*x + 2
+print(d1)
+
+# Value at x = 1
+val_at_1 = d1.subs({x: 1})     # 12
+print(val_at_1)
+
+# Critical points (solve d1 = 0)
+crit = solve(d1)                # [-1/5]
+print(crit)
+
+# Second derivative
+d2 = Derivative(y, x, 2).doit() # 10
+print(d2)
+
+# Classify: d2 > 0 → local MIN at x = -1/5
+for cp in crit:
+    val = d2.subs({x: cp}).evalf()
+    print(f'At x={cp}: d2={val} → {"local MIN" if val > 0 else "local MAX"}')</pre>
+      <p>d1 = 10x + 2. At x=1: d1 = 12 (slope of tangent = 12). Critical point: x = −1/5. d2 = 10 &gt; 0 → <strong>local minimum</strong> at x = −1/5. f(−1/5) = 5(1/25) + 2(−1/5) + 8 = 1/5 − 2/5 + 8 = 39/5 = 7.8.</p>
+    </div>
+  </div>
+
+  <!-- W5 -->
+  <div class="qa-item">
+    <div class="qa-q" onclick="toggle(this)">
+      <span>Q11 (Week 5) — For v(t) = t² − 2t − 3 on [2, 4], find: (a) displacement, (b) total distance travelled.</span>
+      <span style="display:flex;align-items:center;gap:8px;flex-shrink:0"><span class="week-pill" style="background:rgba(246,91,141,0.15);color:var(--w5)">W5</span><svg class="qa-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span>
+    </div>
+    <div class="qa-a">
+      <p><strong>Step 1:</strong> Find zeros of v on [2,4]. v(t) = (t−3)(t+1) = 0 → t=3. v &lt; 0 on [2,3], v &gt; 0 on [3,4].</p>
+      <p><strong>Antiderivative:</strong> F(t) = t³/3 − t² − 3t</p>
+      <p><strong>(a) Displacement = ∫₂⁴ v dt = F(4) − F(2)</strong></p>
+      <p>F(4) = 64/3 − 16 − 12 = 64/3 − 28 = 64/3 − 84/3 = −20/3</p>
+      <p>F(2) = 8/3 − 4 − 6 = 8/3 − 10 = 8/3 − 30/3 = −22/3</p>
+      <p>Displacement = −20/3 − (−22/3) = 2/3 metres ≈ 0.67 m (net forward)</p>
+      <p><strong>(b) Distance = |∫₂³ v dt| + ∫₃⁴ v dt</strong></p>
+      <p>F(3) = 27/3 − 9 − 9 = 9 − 18 = −9</p>
+      <p>|∫₂³ v dt| = |F(3) − F(2)| = |−9 − (−22/3)| = |−27/3 + 22/3| = |−5/3| = 5/3</p>
+      <p>∫₃⁴ v dt = F(4) − F(3) = −20/3 − (−9) = −20/3 + 27/3 = 7/3</p>
+      <p>Total distance = 5/3 + 7/3 = 12/3 = <strong>4 metres</strong></p>
+    </div>
+  </div>
+
+  <div class="qa-item">
+    <div class="qa-q" onclick="toggle(this)">
+      <span>Q12 (Week 5) — What is the Net Change Theorem? How does it connect to the SARS deaths problem and the concept of a Riemann sum?</span>
+      <span style="display:flex;align-items:center;gap:8px;flex-shrink:0"><span class="week-pill" style="background:rgba(246,91,141,0.15);color:var(--w5)">W5</span><svg class="qa-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span>
+    </div>
+    <div class="qa-a">
+      <p><strong>Net Change Theorem:</strong> ∫ₐᵇ F′(x) dx = F(b) − F(a). The integral of a rate of change equals the net change in the quantity.</p>
+      <p><strong>Connection to SARS:</strong> Let D(t) = deaths per day (the rate of change of total deaths). Then ∫ D(t) dt = total deaths over that period. The area under the D(t) curve equals the net change in total death count.</p>
+      <p><strong>Riemann sum approximation:</strong> Since we only have data at 14-day intervals, we approximate ∫D(t)dt using rectangles. Each rectangle has width Δt = 14 days and height = D(tᵢ) deaths/day. Area of one rectangle = D(tᵢ) × 14 = deaths in that 14-day interval. Sum of all rectangles ≈ total deaths from March 1 to May 24.</p>
+      <p>Left endpoint estimate: 14 × (0.0079 + 0.0638 + 0.1944 + 0.4435 + 0.5620 + 0.4630) ≈ <strong>24.3 deaths</strong></p>
+    </div>
+  </div>
+
+  <div class="qa-item">
+    <div class="qa-q" onclick="toggle(this)">
+      <span>Q13 (Week 5 Lab) — Using SymPy, compute the definite integral ∫₀² kx dx and verify the PDF property that ∫_{-∞}^{∞} (1/√(2π))e^{-(x-10)²/2} dx = 1.</span>
+      <span style="display:flex;align-items:center;gap:8px;flex-shrink:0"><span class="week-pill" style="background:rgba(246,91,141,0.15);color:var(--w5)">W5</span><svg class="qa-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span>
+    </div>
+    <div class="qa-a">
+      <pre style="background:#0a0c12;border:1px solid #252935;border-radius:6px;padding:1rem;font-size:12px;margin-top:0">from sympy import symbols, Integral, exp, sqrt, pi, S
+
+x, k = symbols('x k')
+
+# Definite integral ∫₀² kx dx
+result = Integral(k*x, (x, 0, 2)).doit()
+print(result)   # 2*k
+
+# PDF property verification
+f = exp(-(x - 10)**2 / 2) / sqrt(2*pi)
+total = Integral(f, (x, -S.Infinity, S.Infinity)).doit().evalf()
+print(total)    # 1.00000000000000 ✓</pre>
+      <p>∫₀² kx dx = [kx²/2]₀² = k(4)/2 − 0 = 2k. This makes sense: the antiderivative of kx is kx²/2.</p>
+      <p>The PDF integrates to exactly 1 over all real numbers — this is the defining property of any probability density function. It means probability = area, and the total probability over all outcomes must be 100%.</p>
+    </div>
+  </div>
+
+</section>
+
+</div>
+
+<script>
+function toggle(el) {
+  const ans = el.nextElementSibling;
+  const chev = el.querySelector('.qa-chevron');
+  ans.classList.toggle('open');
+  chev.classList.toggle('open');
+}
+</script>
+</body>
+</html>
